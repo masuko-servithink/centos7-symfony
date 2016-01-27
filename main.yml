@@ -36,6 +36,7 @@
         - php-pdo
         - php-cli
         - php-devel
+        - php-pear
         - php-mysqlnd
         - php-mbstring
         - php-gd
