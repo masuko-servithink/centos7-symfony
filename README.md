@@ -1,29 +1,29 @@
-Setup local development environment.  Installs Apache, PHP, MySQL, Ruby and Node.js.  See main.yml for more details.
+Setup local development environment.  Installs Apache, PHP, Postgres, Symfony.  See ncctest.yml for more details.
 
-```
-mkdir mycentos && cd mycentos
-vagrant init bento/centos-6.7
-vi Vagrantfile # IP編集
-vagrant up
-vagrant ssh
-sudo yum -y install git
-git clone https://github.com/dotinstallres/centos65.git
-cd centos65
-./run.sh
-exec $SHELL -l
-```
+*HOST(mac)
 
-If you need to update the environment, please follow instructions below.
+- download virtualbox
+- download vagrant
+- vagrant box add {{ centos7 box }}
+- mkdir centos7 && cd centos7
+- vagrant init
+- vim Vagrantfile
+- vagrant up
 
-```
-cd
-cd mycentos # Vagrantfileがあるフォルダに移動
-vagrant up
-vagrant ssh
-cd centos65
-git pull --rebase
-./run.sh
-exec $SHELL -l
-```
+*GUEST(centos7.0)
 
+- sudo yum install -y git
+- git clone https://github.com/masuko-servithink/centos7-symfony.git
 
+- cd centos7-symfony
+- ./run.sh
+- exec $SHELL -l
+- download {{ project file }}
+
+*TROUBLE-SHOOTING
+
+- vagrant plugin install vagrant-vbguest
+- vagrant vbguest
+- vagrant reload
+- vagrant ssh
+- sudo yum install -y ftp://ftp.icm.edu.pl/vol/rzm5/linux-slc/centos/7.1.1503/os/x86_64/Packages/kernel-devel-3.10.0-229.el7.x86_64.rpm
