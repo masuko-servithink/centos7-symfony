@@ -1,0 +1,3 @@
+dbuser: "symfony"
+dbpass: "symfony"
+dbname: "ncc"

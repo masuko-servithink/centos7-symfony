@@ -1,0 +1,10 @@
+- name: remove localtime
+  file: path=/etc/localtime state=absent
+- name: change timezone
+  file: src=/usr/share/zoneinfo/Asia/Tokyo dest=/etc/localtime state=link force=yes mode=0644
+- name: change locale
+  command: localectl set-locale LANG=ja_JP.utf8
+- name: start firewalld
+  service: name=firewalld enabled=yes state=started
+- name: allow http access
+  firewalld: zone=public service=http permanent=true state=enabled immediate=true

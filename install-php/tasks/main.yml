@@ -1,0 +1,11 @@
+- name: install php
+  yum: name={{item}} state=present
+  with_items:
+    - php
+    - php-xml
+  notify:
+    - restart apache
+- name: copy php.ini.custom
+  copy: src=php.ini.custom dest=/etc/php.ini backup=yes    
+  notify:
+    - restart apache

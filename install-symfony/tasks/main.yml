@@ -1,0 +1,20 @@
+- name: install composer
+  shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin
+- name: install symfony and build project
+  shell: php composer.phar create-project symfony/framework-standard-edition /var/www/ncc "2.3.*"
+- name: set context to server root
+  shell: chcon -R -t httpd_sys_content_t /var/www/ncc
+- name: copy httpd.conf.custom
+  copy: src=httpd.conf.custom dest=/etc/httpd/conf/httpd.conf backup=yes
+  notify:
+    - restart apache
+- name: setsebool
+  shell: setsebool -P allow_httpd_anon_write 1
+- name: set context to app/cache
+  shell: chcon -R -t public_content_rw_t /var/www/ncc/app/cache
+- name: set permission to app/cache
+  shell: chmod 1777 /var/www/ncc/app/cache
+- name: set context to app/logs
+  shell: chcon -R -t public_content_rw_t /var/www/ncc/app/logs
+- name: set permission to app/logs
+  shell: chmod 1777 /var/www/ncc/app/logs

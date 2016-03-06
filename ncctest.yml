@@ -1,0 +1,13 @@
+---
+- hosts: 127.0.0.1
+  sudo: yes
+  vars:
+    - dbuser: "symfony"
+    - dbpass: "symfony"
+    - dbname: "ncc"
+  roles:
+    - system
+    - install-tools
+    - install-apache
+    - install-php
+    - install-postgres
